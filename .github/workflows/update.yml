@@ -8,10 +8,17 @@ jobs:
     steps:
     - name: import GitHub actions checkout
       uses: actions/checkout@v3
-    - name: run git submodule update --remote
+    - name: remove submodule
       run: |
-        git pull
-        git submodule update --init --recursive
+        git rm code
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add .
+        git commit -m "push from update.yml"
+        git push
+    - name: re-add submodule
+      run: |
+        git submodule add -b ghpages-mirror-test https://github.com/AdamRaichu/code
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add .
