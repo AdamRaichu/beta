@@ -4,9 +4,11 @@ on:
     inputs:
       repo_url:
         description: 'url of the repo'
+        default: "https://github.com/OWNER/REPO"
         required: true
       branch:
         description: "namespace of the branch to clone"
+        default: "main"
         required: true
 jobs:
   npm:
