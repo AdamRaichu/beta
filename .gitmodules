@@ -2,3 +2,7 @@
 	path = code
 	url = https://github.com/AdamRaichu/code
 	branch = ghpages-mirror-test
+[submodule "games"]
+	path = games
+	url = https://github.com/AdamRaichu/games
+	branch = main
