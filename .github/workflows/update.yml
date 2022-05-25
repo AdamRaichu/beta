@@ -1,0 +1,18 @@
+name: Update submodules
+on:
+  workflow_dispatch: 
+jobs:
+  npm:
+    name: update
+    runs-on: ubuntu-latest
+    steps:
+    - name: import GitHub actions checkout
+      uses: actions/checkout@v3
+    - name: run git submodule update --remote
+      run: |
+        git submodule update --remote
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add .
+        git commit -m "push from clone.yml"
+        git push
