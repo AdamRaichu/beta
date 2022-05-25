@@ -11,8 +11,8 @@ on:
         default: "main"
         required: true
 jobs:
-  npm:
-    name: clone AdamRaichu/code
+  clone:
+    name: clone repo
     runs-on: ubuntu-latest
     steps:
     - name: import GitHub actions checkout

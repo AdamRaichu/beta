@@ -2,7 +2,7 @@ name: Update submodules
 on:
   workflow_dispatch: 
 jobs:
-  npm:
+  update:
     name: update
     runs-on: ubuntu-latest
     steps:
