@@ -21,3 +21,8 @@ jobs:
     - name: remove submodule
       run: |
         git rm ${{ github.event.inputs.submodule_name }}
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add .
+        git commit -m "deleted submodule ${{ github.event.inputs.submodule_name }}"
+        git push
