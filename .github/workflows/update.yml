@@ -22,7 +22,9 @@ jobs:
         git rm ${{ github.event.inputs.submodule_name }}
     - name: Get gitmodule object
       id: get-gitmodule
-      run: node update_yml.js
+      run: |
+        npm install @actions/core
+        node update_yml.js
     - name: re-add submodule
       run: |
         git submodule add -b ${{ steps.get-gitmodule.outputs.MODULE_ONE_BRANCH }} ${{ steps.get-gitmodule.outputs.MODULE_ONE_URL }}
