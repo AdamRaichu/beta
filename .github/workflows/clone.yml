@@ -1,4 +1,4 @@
-name: Add submodule AdamRaichu/code
+name: Add submodule
 on:
   workflow_dispatch: 
     inputs:

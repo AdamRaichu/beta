@@ -1,6 +1,11 @@
-name: Update submodules
+name: Update a submodule
 on:
   workflow_dispatch: 
+    inputs:
+      submodule_name:
+        description: 'name of the submodule from .gitmodules'
+        default: "code"
+        required: true
 jobs:
   update:
     name: update
@@ -8,19 +13,23 @@ jobs:
     steps:
     - name: import GitHub actions checkout
       uses: actions/checkout@v3
+    - name: import Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
     - name: remove submodule
       run: |
-        git rm code
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        git add .
-        git commit -m "push from update.yml"
-        git push
+        git rm ${{ github.event.inputs.submodule_name }}
+    - name: Get gitmodule object
+      id: get-gitmodule
+      run: node update_yml.js
     - name: re-add submodule
       run: |
-        git submodule add -b ghpages-mirror-test https://github.com/AdamRaichu/code
+        git submodule add -b ${{ steps.get-gitmodule.outputs.MODULE_ONE_BRANCH }} ${{ steps.get-gitmodule.outputs.MODULE_ONE_URL }}
+    - name: push changes
+      run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add .
-        git commit -m "push from update.yml"
+        git commit -m "used update.yml to update submodule ${{ github.event.inputs.submodule_name }}"
         git push

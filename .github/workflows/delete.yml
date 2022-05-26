@@ -1,0 +1,23 @@
+name: Delete a submodule
+on:
+  workflow_dispatch: 
+    inputs:
+      submodule_name:
+        description: 'name of the submodule from .gitmodules'
+        default: "code"
+        required: true
+      confirmation:
+        description: 'Please type "I understand this will delete a folder, boss." to confirm.'
+        required: true
+        default: "THIS WILL DELETE A FOLDER"
+jobs:
+  delete:
+    name: Delete
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.confirmation == 'I understand this will delete a folder, boss.' }} 
+    steps:
+    - name: import GitHub actions checkout
+      uses: actions/checkout@v3
+    - name: remove submodule
+      run: |
+        git rm ${{ github.event.inputs.submodule_name }}
