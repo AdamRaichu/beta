@@ -20,10 +20,10 @@ jobs:
     - name: remove submodule
       run: |
         git rm ${{ github.event.inputs.submodule_name }}
+    - uses: actions/github-script@v6
     - name: Get gitmodule object
       id: get-gitmodule
       run: |
-        npm install @actions/core
         node update_yml.js
     - name: re-add submodule
       run: |
