@@ -24,6 +24,8 @@ jobs:
       with:
         script: |
           const fs = require("fs")
+          console.log("fs.existsSync('./actions.log.js')")
+          console.log(fs.existsSync("./actions.log.js"))
           if (fs.existsSync("./actions.log.js")) {} else {
             console.log("actions.log.js does not exist (and I'm assuming neither does github-actions.log)\nTherefore, I will now create those files.")
             var content = 'module.exports=function(message,logLevel,source){const fs=require("fs");fs.readFile("github-actions.log",(err, buff)=>{if(err){console.error("[!!! ----- logAction failed ----- !!!]");console.error(err);return;};var content=buff.toString();content+="\\n";content+=new Date();content+=" [";if(logLevel===3){content+="ERROR] <";}else if(logLevel===2){content+="WARN] <";}else if(logLevel===1){content+="INFO] <";}else{content+="INFO] <";console.warn("`logLevel` was either invalid or not provided. Falling back to `1` (INFO).");};if(typeof source!=="undefined"){content+=source;content+="> ";}else{content+="unknown> ";console.warn("`source` was not provided. Falling back to `unknown`.");};content+=message;fs.writeFile("github-actions.log",content,err=>{if(err){console.error("[!!! ----- logAction failed ----- !!!]");console.error(err);};console.log("action logged");});});};'
