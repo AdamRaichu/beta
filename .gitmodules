@@ -1,4 +1,4 @@
-[submodule "games"]
-	path = games
+[submodule "test"]
+	path = test
 	url = https://github.com/AdamRaichu/games
 	branch = main
