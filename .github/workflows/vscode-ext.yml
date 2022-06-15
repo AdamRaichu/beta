@@ -1,4 +1,4 @@
-name: Add submodule
+name: vscode ext
 on:
   workflow_dispatch: 
 jobs:
