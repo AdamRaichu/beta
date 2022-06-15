@@ -1,0 +1,17 @@
+name: Add submodule
+on:
+  workflow_dispatch: 
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: import GitHub actions checkout
+      uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+    - name: try to make a vscode ext
+      run: |
+        npm i -g yo generator-code
+        yo code
