@@ -1,0 +1,4 @@
+[submodule "games"]
+	path = games
+	url = https://github.com/AdamRaichu/games
+	branch = ladder
